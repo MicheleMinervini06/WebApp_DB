@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Register Customer{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Register New Customer</h1>
+<form method="POST" class="row g-3">
+    <div class="col-md-6">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" name="email" class="form-control" required>
+    </div>
+    <div class="col-md-6">
+        <label for="phone" class="form-label">Phone</label>
+        <input type="text" id="phone" name="phone" class="form-control" required>
+    </div>
+    <div class="col-md-12">
+        <label for="customerType" class="form-label">Customer Type</label>
+        <select id="customerType" name="customer_type" class="form-select" onchange="toggleCustomerType()" required>
+            <option value="">Select Type</option>
+            <option value="Individual">Individual</option>
+            <option value="Business">Business</option>
+        </select>
+    </div>
+
+    <!-- Individual Fields -->
+    <div id="individualFields" class="col-md-12" style="display: none;">
+        <h3>Individual Details</h3>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" id="name" name="name" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label for="surname" class="form-label">Surname</label>
+                <input type="text" id="surname" name="surname" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label for="dob" class="form-label">Date of Birth</label>
+                <input type="date" id="dob" name="dob" class="form-control">
+            </div>
+        </div>
+    </div>
+
+    <!-- Business Fields -->
+    <div id="businessFields" class="col-md-12" style="display: none;">
+        <h3>Business Details</h3>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="companyName" class="form-label">Company Name</label>
+                <input type="text" id="companyName" name="company_name" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label for="vatNumber" class="form-label">VAT Number</label>
+                <input type="text" id="vatNumber" name="vat_number" class="form-control">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+
+<script>
+    function toggleCustomerType() {
+        const type = document.getElementById('customerType').value;
+        document.getElementById('individualFields').style.display =
+            type === 'Individual' ? 'block' : 'none';
+        document.getElementById('businessFields').style.display =
+            type === 'Business' ? 'block' : 'none';
+    }
+</script>
+
+<!-- Feedback Messages -->
+{% if result %}
+<div class="alert alert-success mt-4">
+    <h4>Result:</h4>
+    <pre>{{ result }}</pre>
+</div>
+{% endif %}
+
+{% if error %}
+<div class="alert alert-danger mt-4">
+    <h4>Error:</h4>
+    <pre>{{ error }}</pre>
+</div>
+{% endif %}
+{% endblock %}

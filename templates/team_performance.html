@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Team Performance{% endblock %}
+
+{% block content %}
+<h1 class="mb-4 text-center">Teams Sorted by Performance</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Team ID</th>
+                <th>Team Name</th>
+                <th>Performance Score</th>
+                <th>Number of Operations</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for line in result.splitlines() %}
+            {% if "Team ID" in line %}
+            {% set data = line.split('|') %}
+            <tr>
+                <td>{{ data[0].split(': ')[1].strip() }}</td>
+                <td>{{ data[1].split(': ')[1].strip() }}</td>
+                <td>{{ data[2].split(': ')[1].strip() }}</td>
+                <td>{{ data[3].split(': ')[1].strip() }}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Feedback Messages -->
+{% if error %}
+<div class="alert alert-danger mt-4">
+    <h4>Error:</h4>
+    <pre>{{ error }}</pre>
+</div>
+{% endif %}
+{% endblock %}

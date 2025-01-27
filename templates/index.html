@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<h1 class="text-center mb-4">Brightway Logistics Operations</h1>
+<div class="d-flex flex-column align-items-center gap-2">
+    <a href="{{ url_for('register_customer') }}" class="btn btn-primary" style="width: 200px;">Register Customer</a>
+    <a href="{{ url_for('add_order') }}" class="btn btn-primary" style="width: 200px;">Add Order</a>
+    <a href="{{ url_for('assign_order') }}" class="btn btn-primary" style="width: 200px;">Assign Order</a>
+    <a href="{{ url_for('view_operations') }}" class="btn btn-primary" style="width: 200px;">View Operations</a>
+    <a href="{{ url_for('team_performance') }}" class="btn btn-primary" style="width: 200px;">Team Performance</a>
+</div>
+{% endblock %}

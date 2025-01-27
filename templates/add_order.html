@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Add New Order{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Add New Order</h1>
+<form method="POST" class="row g-3">
+    <div class="col-md-6">
+        <label for="orderType" class="form-label">Order Type</label>
+        <select id="orderType" name="order_type" class="form-select" required>
+            <option value="Regular">Regular</option>
+            <option value="Urgent">Urgent</option>
+            <option value="Bulk">Bulk</option>
+        </select>
+    </div>
+    <div class="col-md-6">
+        <label for="expectedDate" class="form-label">Expected Date</label>
+        <input type="date" id="expectedDate" name="expected_date" class="form-control" required>
+    </div>
+    <div class="col-md-6">
+        <label for="cost" class="form-label">Cost</label>
+        <input type="number" id="cost" name="cost" class="form-control" step="0.01" required>
+    </div>
+    <div class="col-md-6">
+        <label for="placementModality" class="form-label">Placement Modality</label>
+        <select id="placementModality" name="placement_modality" class="form-select" required>
+            <option value="phone">Phone</option>
+            <option value="email">Email</option>
+            <option value="online platform">Online Platform</option>
+        </select>
+    </div>
+    <div class="col-md-6">
+        <label for="accountCode" class="form-label">Business Account Code</label>
+        <select id="accountCode" name="account_code" class="form-select" required>
+            <option value="" disabled selected>Select Business Account Code</option>
+            {% for account_code in account_codes %}
+            <option value="{{ account_code }}">{{ account_code }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-6">
+        <label for="state" class="form-label">State</label>
+        <select id="state" name="state" class="form-select" required>
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="On Hold">On Hold</option>
+        </select>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+
+<!-- Feedback Messages -->
+{% if result %}
+<div class="alert alert-success mt-4">
+    <h4>Result:</h4>
+    <pre>{{ result }}</pre>
+</div>
+{% endif %}
+
+{% if error %}
+<div class="alert alert-danger mt-4">
+    <h4>Error:</h4>
+    <pre>{{ error }}</pre>
+</div>
+{% endif %}
+{% endblock %}
